@@ -12,6 +12,7 @@ export class AuthService implements IAuthService{// e responsabil de creat un us
     ){}
         async validateUser(details:UserDetails) { //daca userul e gasit il returnam, daca userul nu este il cream
            const user= await this.userService.findUser(details.DiscordID)
-           return user || this.userService.createUser(details); // returnam userul gasit sau cream noi unul
+           const {DiscordID, ...updatedDetails}=details;
+           return user ? this.userService.updateUser(user, updatedDetails) : this.userService.createUser(details); // returnam userul gasit sau cream noi unul si il updatam de fiecare data cand e gasit
         }
 } 

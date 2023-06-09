@@ -3,7 +3,7 @@ import { IUserService } from "../interfaces/user";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { UserConfig } from "src/typeorm/entities/UserConfig";
-import { UserDetails } from "src/types/types";
+import { UpdateUserDetails, UserDetails } from "src/types/types";
 
 
 @Injectable()
@@ -21,5 +21,12 @@ export class UserService implements IUserService{ // responsabil pentru a crea u
         console.log('Gaseste User')
        
         return this.userRepository.findOneBy({DiscordID}); // note: FindOne nu mai merge in versiunea asta, daca da eroare sa se incerce FindOneBy
+    }
+    updateUser(user:UserConfig, details:UpdateUserDetails) {
+        console.log('Update User');
+        return this.userRepository.save({
+            ...user,  // destructuram userul
+            ...details,
+        }); // va returna userul
     }
 }

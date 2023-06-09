@@ -18,11 +18,17 @@ export class DiscordStrategy extends PassportStrategy(Strategy){ // acest discor
         });
     }
 
-    async validate(accesToken: string, refreshToken:string, profile:Profile){ // cand userul apasa pe "authorize" din platforma Discord se va invoca aceasta metoda si va returna token-urile si profilul
+    async validate(accessToken: string, refreshToken:string, profile:Profile){ // cand userul apasa pe "authorize" din platforma Discord se va invoca aceasta metoda si va returna token-urile si profilul
         console.log('DiscordStrategy Validate Method');
         console.log(profile.username);
         console.log(profile.guilds[profile.guilds.findIndex((server)=> server.name=="NextGen™ - Official Page")])
 
-        return this.authService.validateUser({DiscordID:profile.id});  // validam userul
+        return this.authService.validateUser({
+            DiscordID:profile.id,
+            username: profile.username,
+            discriminator:profile.discriminator,
+            accessToken,
+            refreshToken,
+        });  // validam userul
     }
 }
