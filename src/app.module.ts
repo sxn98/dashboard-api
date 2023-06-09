@@ -7,6 +7,7 @@ import { SessionConfig } from './typeorm/entities/SessionConfig';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { PassportModule } from '@nestjs/passport';
+import { DiscordRequestsModule } from './discordRequests/discordRequests.module';
 
 
 @Module({
@@ -26,7 +27,8 @@ import { PassportModule } from '@nestjs/passport';
       entities:[GuildConfig,UserConfig,SessionConfig],        // (daca modificam dintr-o entitate o coloana, se va modifica si in mysql)
     }),
     AuthModule,
-    UserModule                    
+    UserModule,
+    DiscordRequestsModule                    
   ],
   controllers: [],
   providers: [],
