@@ -1,20 +1,22 @@
 import { Injectable } from "@nestjs/common";
 import { IDiscordHttpService } from "../interfaces/discord.http";
 import axios from 'axios';
+import { PartialGuild } from "src/types/types";
 
 
 @Injectable()
 export class DiscordHttpService implements IDiscordHttpService{
-    fetchBotGuilds() {
+    async fetchBotGuilds() {
         const TOKEN=process.env.BOT_TOKEN;
-        return axios.get('https://discord.com/api/v10/users/@me/guilds',{
+        return await axios.get<PartialGuild[]>('https://discord.com/api/v10/users/@me/guilds',{
             headers:{
                 Authorization:`Bot ${TOKEN}`,
             }
         })
     }
-    fetchUserGuilds(accessToken:string) {
-        return axios.get('https://discord.com/api/v10/users/@me/guilds',{
+    
+    async fetchUserGuilds(accessToken:string) {
+        return await axios.get<PartialGuild[]>('https://discord.com/api/v10/users/@me/guilds',{
          headers:{
              Authorization: `Bearer ${accessToken}`,
          },
@@ -22,3 +24,8 @@ export class DiscordHttpService implements IDiscordHttpService{
      }
 
 }
+
+// console.log('astept o secunda')
+//     const asteapta= async() => await new Promise(resolve=> setTimeout(resolve,5000));
+//     asteapta();
+//     console.log('am asteptat')

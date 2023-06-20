@@ -14,4 +14,16 @@ export type UpdateUserDetails={
     discriminator:string;
 }
 
+export type PartialGuild={ // punem datele provenite intr-o ordine
+    id:string;
+    name: string;
+    icon:string;
+    owner:boolean;
+    permissions:string;
+    features: string[];
+
+};
+
+
+
 export type Done=(err:Error, user:UserConfig)=>void //va returna void
