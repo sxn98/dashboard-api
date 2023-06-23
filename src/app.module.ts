@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { DiscordRequestsModule } from './discordRequests/discordRequests.module';
+import { GuildsModule } from './guilds/guilds.module';
 
 
 @Module({
@@ -28,7 +29,8 @@ import { DiscordRequestsModule } from './discordRequests/discordRequests.module'
     }),
     AuthModule,
     UserModule,
-    DiscordRequestsModule                    
+    DiscordRequestsModule,
+    GuildsModule                    
   ],
   controllers: [],
   providers: [],
