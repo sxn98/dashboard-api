@@ -24,6 +24,24 @@ export type PartialGuild={ // punem datele provenite intr-o ordine
 
 };
 
+export type PartialGuildChannel={
+    id:string;
+    type:number;
+    last_message_id:string;
+    flags:number;
+    last_pin_timestamp:string;
+    guild_id:string
+    name:string;
+    parent_id?:string;
+    rate_limit_per_user:string;
+    topic?:string;
+    position:string;
+    permission_overwrites:string[];
+    nsfw:boolean;
+    icon_emoji?:string;
+    theme_color?:string;
+}
+
 
 
 export type Done=(err:Error, user:UserConfig)=>void //va returna void

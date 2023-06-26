@@ -34,10 +34,13 @@ export class DiscordService implements IDiscordService{ // preluam serverele de 
        )    
       // console.log(mutualGuilds);
        //return {userGuilds, botGuilds};
-       return {mutualGuilds};
-    } catch (error) {
-        console.log(error)
+        return {mutualGuilds};
+        } catch (error) {
+            console.log(error)
+        }
     }
-}
-    
+
+    getGuildChannels(GuildID: string) {
+        return this.discordHttpService.fetchGuildChannels(GuildID);
+    }   
 }

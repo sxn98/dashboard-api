@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { IDiscordHttpService } from "../interfaces/discord.http";
 import axios from 'axios';
-import { PartialGuild } from "src/types/types";
+import { PartialGuild, PartialGuildChannel } from "src/types/types";
 
 
 @Injectable()
@@ -23,6 +23,14 @@ export class DiscordHttpService implements IDiscordHttpService{
         });
      }
 
+     fetchGuildChannels(GuildID: string) {
+        const TOKEN=process.env.BOT_TOKEN;
+         return axios.get<PartialGuildChannel[]>(`https://discord.com/api/v10/guilds/${GuildID}/channels`, {
+            headers:{
+                Authorization: `Bot ${TOKEN}`,
+            },
+         });
+     }
 }
 
 // console.log('astept o secunda')
