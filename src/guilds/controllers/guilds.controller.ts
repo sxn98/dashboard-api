@@ -1,9 +1,16 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post } from "@nestjs/common";
 import { IGuildsService } from "../interfaces/guilds";
+import { WebsocketHandler } from "src/websocket/socket";
+
 
 @Controller('guilds')
 export class GuildsController{
-    constructor(@Inject('GUILD_SERVICE') private readonly guildsService: IGuildsService){}
+
+
+    constructor(
+        @Inject('GUILD_SERVICE') private readonly guildsService: IGuildsService,
+        @Inject(WebsocketHandler) private readonly wsHandler:WebsocketHandler,
+        ){}
 
     @Get('config/:GuildID') // folosim un parametru de tip ruta pentru a lua detaliile unui anumit server
     async getGuildConfig(@Param('GuildID') GuildID:string){
@@ -18,8 +25,11 @@ export class GuildsController{
         @Param('GuildID') GuildID:string,
         @Body('prefix') prefix:string,
         ) {
-            console.log(GuildID, prefix);
-            return this.guildsService.updateGuildPrefix(GuildID,prefix);
+            //console.log(GuildID, prefix);
+
+            const config = await this.guildsService.updateGuildPrefix(GuildID,prefix);
+            this.wsHandler.guildPrefixUpdate(config)
+            return config;
         }
 
     @Post(':GuildID/config/welcome')

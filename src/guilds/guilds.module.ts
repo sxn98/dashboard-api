@@ -3,10 +3,12 @@ import { GuildsController } from './controllers/guilds.controller';
 import { GuildsService } from './services/guilds.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GuildConfig } from 'src/typeorm/entities/GuildConfig';
+import { WebSocketModule } from 'src/websocket/websocket.module';
 
 @Module({
     imports:[
-        TypeOrmModule.forFeature([GuildConfig])
+        TypeOrmModule.forFeature([GuildConfig]),
+        WebSocketModule,
     ],
     controllers:[GuildsController],
     providers:[
