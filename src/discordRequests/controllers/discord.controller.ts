@@ -18,4 +18,10 @@ export class DiscordController{
         const {data}= await this.discordService.getGuildChannels(GuildID);
         return data.filter((channels) => channels.type===0);
     }
+
+    @Get('guilds/:GuildID/roles')
+    async getGuildRoles(@Param('GuildID') GuildID:string){
+        const {data}=await this.discordService.getGuildRoles(GuildID);
+        return data
+    }
 }

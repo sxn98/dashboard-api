@@ -42,6 +42,20 @@ export type PartialGuildChannel={
     theme_color?:string;
 }
 
+export type GuildRoles={
+    id:string
+    name:string;
+    color: number;
+    hoist: boolean;
+    icon?: string;
+    unicode_emoji?: string;
+    position:number;
+    permissions:string;
+    managed:boolean;
+    mentionable: boolean
+    tags?:string[]
+}
+
 
 
 export type Done=(err:Error, user:UserConfig)=>void //va returna void

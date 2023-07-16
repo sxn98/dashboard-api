@@ -3,6 +3,7 @@ import { IGuildsService } from "../interfaces/guilds";
 import { WebsocketHandler } from "src/websocket/socket";
 
 
+
 @Controller('guilds')
 export class GuildsController{
 
@@ -10,6 +11,7 @@ export class GuildsController{
     constructor(
         @Inject('GUILD_SERVICE') private readonly guildsService: IGuildsService,
         @Inject(WebsocketHandler) private readonly wsHandler:WebsocketHandler,
+        
         ){}
 
     @Get('config/:GuildID') // folosim un parametru de tip ruta pentru a lua detaliile unui anumit server
@@ -39,4 +41,6 @@ export class GuildsController{
         ){
         return this.guildsService.updateWelcomeChannel(GuildID,channelID)
     }
+
+
 }

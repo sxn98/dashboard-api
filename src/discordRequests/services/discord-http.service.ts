@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { IDiscordHttpService } from "../interfaces/discord.http";
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { PartialGuild, PartialGuildChannel } from "src/types/types";
 
 
@@ -28,6 +28,14 @@ export class DiscordHttpService implements IDiscordHttpService{
          return axios.get<PartialGuildChannel[]>(`https://discord.com/api/v10/guilds/${GuildID}/channels`, {
             headers:{
                 Authorization: `Bot ${TOKEN}`,
+            },
+         });
+     }
+     fetchGuildRoles(GuildID: string){
+         const TOKEN=process.env.BOT_TOKEN
+         return axios.get(`https://discord.com/api/v10/guilds/${GuildID}/roles`,{
+            headers:{
+                Authorization:`Bot ${TOKEN}`,
             },
          });
      }

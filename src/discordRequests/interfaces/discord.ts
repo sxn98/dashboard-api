@@ -6,4 +6,5 @@ export interface IDiscordService{
     getUserGuilds(accessToken:string);
     getMutualGuilds(accessToken:string);
     getGuildChannels(GuildID:string):Promise<AxiosResponse<PartialGuildChannel[]>>;
+    getGuildRoles(GuildID:string);
 }

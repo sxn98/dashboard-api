@@ -43,4 +43,7 @@ export class DiscordService implements IDiscordService{ // preluam serverele de 
     getGuildChannels(GuildID: string) {
         return this.discordHttpService.fetchGuildChannels(GuildID);
     }   
+    getGuildRoles(GuildID: string) {
+        return this.discordHttpService.fetchGuildRoles(GuildID)
+    }
 }

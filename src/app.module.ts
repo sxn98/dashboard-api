@@ -10,6 +10,8 @@ import { PassportModule } from '@nestjs/passport';
 import { DiscordRequestsModule } from './discordRequests/discordRequests.module';
 import { GuildsModule } from './guilds/guilds.module';
 import { WebSocketModule } from './websocket/websocket.module';
+import { AutoRoleConfig } from './typeorm/entities/AutoRoleConfig';
+import { GuildsAutoRoleModule } from './guildautorole/guildsautorole.module';
 
 
 @Module({
@@ -26,13 +28,14 @@ import { WebSocketModule } from './websocket/websocket.module';
       password: process.env.MYSQL_PASS,
       database: process.env.MYSQL_DATABASE,
       synchronize: true,  // cand modificam entitatile se updateaza automat in tabelele din BD 
-      entities:[GuildConfig,UserConfig,SessionConfig],        // (daca modificam dintr-o entitate o coloana, se va modifica si in mysql)
+      entities:[GuildConfig,UserConfig,SessionConfig,AutoRoleConfig],        // (daca modificam dintr-o entitate o coloana, se va modifica si in mysql)
     }),
     AuthModule,
     UserModule,
     DiscordRequestsModule,
     GuildsModule,
-    WebSocketModule,                    
+    WebSocketModule,  
+    GuildsAutoRoleModule,                
   ],
   controllers: [],
   providers: [],
