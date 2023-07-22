@@ -21,10 +21,17 @@ export class GuildAutoRoleService implements IGuildsAutoRoleService{
         autoroleconfig.RoleID=RoleID
         autoroleconfig.ActivityName=ActivityName
         
-        console.log(autoroleconfig)
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        // console.log(autoroleconfig)
+        // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         return this.guildAutoRoleConfigRepository.save(autoroleconfig)
 
     }
-
+    async DeleteAutoRole(GuildID: string, RoleID: string, ActivityName: string) {
+        // console.log('s-au sters: ')
+        // console.log(GuildID)
+        // console.log(RoleID)
+        // console.log(ActivityName)
+        this.guildAutoRoleConfigRepository.delete({GuildID,RoleID,ActivityName})
+        return this.guildAutoRoleConfigRepository.findBy({GuildID,RoleID,ActivityName});
+    }
 }

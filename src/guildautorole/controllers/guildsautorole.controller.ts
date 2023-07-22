@@ -1,12 +1,14 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Inject, Param, Post } from "@nestjs/common";
 import { IGuildsAutoRoleService } from "../interfaces/guildsautorole";
+import { WebsocketHandler } from "src/websocket/socket";
+import { AutoRoleConfig } from "src/typeorm/entities/AutoRoleConfig";
 
 @Controller('guilds')
 export class AutoRoleGuildsController{
 
-
     constructor(
         @Inject('GUILDAUTOROLE_SERVICE') private readonly guildsAutoRoleService: IGuildsAutoRoleService,
+        @Inject(WebsocketHandler) private readonly wsHandler:WebsocketHandler,
         ){}
 
         @Get('autoroleconfig/:GuildID')
@@ -27,9 +29,24 @@ export class AutoRoleGuildsController{
                 // console.log(RoleID)
                 // console.log(ActivityName)
                 const config=await this.guildsAutoRoleService.AddAutoRole(GuildID,RoleID,ActivityName)
-            //     const config = await this.guildsService.updateGuildPrefix(GuildID,prefix);
-            //     this.wsHandler.guildPrefixUpdate(config)
-            //     return config;
+                this.wsHandler.autoRoleAdd(config)
+                // console.log('bbbbbbbbbbbbbbbbbbbbbbbb')
+                // console.log(config)
+                return config;
              }
+        @Delete('autoroleconfig/:GuildID/config/remove')
+        async DeleteAutoRole(
+            @Param('GuildID') GuildID:string,
+            @Body('RoleID') RoleID:string,
+            @Body('ActivityName') ActivityName:string,
+        ){
+            
+            const config=await this.guildsAutoRoleService.DeleteAutoRole(GuildID,RoleID,ActivityName)
+            // console.log('teeeest')
+            // console.log(betterConfig)
+            this.wsHandler.autoRoleDelete(config)
+            return config
+            
+        }
 
 }

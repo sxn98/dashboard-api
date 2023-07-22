@@ -1,6 +1,8 @@
 import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
 import { Server } from 'socket.io'
+import { AutoRoleConfig } from "src/typeorm/entities/AutoRoleConfig";
 import { GuildConfig } from "src/typeorm/entities/GuildConfig";
+import { DeleteResult } from "typeorm";
 
 @WebSocketGateway()
 export class WebsocketHandler{ // folosim websocket pentru a trimite schimbarea facuta din frontend catre bot
@@ -16,5 +18,14 @@ export class WebsocketHandler{ // folosim websocket pentru a trimite schimbarea 
     guildPrefixUpdate(config:GuildConfig){  // trimitem noua configurare setata in frontend catre aplicatia botului
         console.log('Emitting')
         this.ws.emit('guildPrefixUpdate',config)
+    }
+    autoRoleAdd(config:AutoRoleConfig){
+        console.log('Emitting autoRoleAdd')
+        this.ws.emit('autoRoleAdd',config)
+    }
+    autoRoleDelete(config:AutoRoleConfig[]){
+        console.log('Emitting autoRoleDelete')
+        console.log(config)
+        this.ws.emit('autoRoleDelete',config)
     }
 }
