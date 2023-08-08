@@ -21,7 +21,7 @@ export class DiscordStrategy extends PassportStrategy(Strategy){ // acest discor
     async validate(accessToken: string, refreshToken:string, profile:Profile){ // cand userul apasa pe "authorize" din platforma Discord se va invoca aceasta metoda si va returna token-urile si profilul
         console.log('DiscordStrategy Validate Method');
         console.log(profile.username);
-        console.log(profile.guilds[profile.guilds.findIndex((server)=> server.name=="NextGen™ - Official Page")])
+        // console.log(profile.guilds[profile.guilds.findIndex((server)=> server.name=="NextGen™ - Official Page")])
 
         return this.authService.validateUser({
             DiscordID:profile.id,

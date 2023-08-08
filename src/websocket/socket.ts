@@ -2,6 +2,7 @@ import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from
 import { Server } from 'socket.io'
 import { AutoRoleConfig } from "src/typeorm/entities/AutoRoleConfig";
 import { GuildConfig } from "src/typeorm/entities/GuildConfig";
+import { LogConfig } from "src/typeorm/entities/LogConfig";
 import { DeleteResult } from "typeorm";
 
 @WebSocketGateway()
@@ -19,6 +20,10 @@ export class WebsocketHandler{ // folosim websocket pentru a trimite schimbarea 
         console.log('Emitting')
         this.ws.emit('guildPrefixUpdate',config)
     }
+    guildWelcomeChannelUpdate(config:GuildConfig){
+        console.log('Emitting')
+        this.ws.emit('guildWelcomeChannelUpdate',config)
+    }
     autoRoleAdd(config:AutoRoleConfig){
         console.log('Emitting autoRoleAdd')
         this.ws.emit('autoRoleAdd',config)
@@ -27,5 +32,10 @@ export class WebsocketHandler{ // folosim websocket pentru a trimite schimbarea 
         console.log('Emitting autoRoleDelete')
         console.log(config)
         this.ws.emit('autoRoleDelete',config)
+    }
+    logUpdate(config:LogConfig){
+        console.log('Emitting logUpdate')
+        console.log(config)
+        this.ws.emit('logUpdate',config)
     }
 }

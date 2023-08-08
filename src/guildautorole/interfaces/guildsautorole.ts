@@ -1,5 +1,5 @@
 import { AutoRoleConfig } from "src/typeorm/entities/AutoRoleConfig";
-import { DeleteResult } from "typeorm";
+
 
 
 export interface IGuildsAutoRoleService{

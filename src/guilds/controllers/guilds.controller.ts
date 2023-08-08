@@ -39,7 +39,9 @@ export class GuildsController{
         @Param('GuildID') GuildID:string,
         @Body('channelID') channelID:string,
         ){
-        return this.guildsService.updateWelcomeChannel(GuildID,channelID)
+            const config=await this.guildsService.updateWelcomeChannel(GuildID,channelID)
+            this.wsHandler.guildWelcomeChannelUpdate(config)
+            return config;
     }
 
 
