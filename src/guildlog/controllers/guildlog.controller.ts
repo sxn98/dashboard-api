@@ -23,12 +23,11 @@ export class GuildLogController{
         @Body('MsgDeletedContent') MsgDeletedContent:boolean,
         @Body('MsgEditedContent') MsgEditedContent:boolean,
         @Body('NicknameChanges') NicknameChanges:boolean,
-        @Body('SelfDeletedEditedMessage') SelfDeletedEditedMessage:boolean,
         @Body('UserForcefullyDisconnected') UserForcefullyDisconnected:boolean,
         @Body('UserForcefullyMoved') UserForcefullyMoved:boolean
      
     ){
-        const config=await this.guildsLogService.updateLogConfig(GuildID,LogChannel,MsgDeletedContent,MsgEditedContent,NicknameChanges,SelfDeletedEditedMessage,UserForcefullyDisconnected,UserForcefullyMoved)
+        const config=await this.guildsLogService.updateLogConfig(GuildID,LogChannel,MsgDeletedContent,MsgEditedContent,NicknameChanges,UserForcefullyDisconnected,UserForcefullyMoved)
         this.wsHandler.logUpdate(config)
         return config;
     }

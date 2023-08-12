@@ -10,7 +10,7 @@ export class GuildLogService implements IGuildsLogService{
     getLogConfig(GuildID: string): Promise<LogConfig> {
         return this.guildLogConfigRepository.findOneBy({GuildID})
     }
-    async updateLogConfig(GuildID: string, LogChannel: string, MsgDeletedContent: boolean, MsgEditedContent: boolean, NicknameChanges: boolean, SelfDeletedEditedMessage: boolean, UserForcefullyDisconnected: boolean, UserForcefullyMoved: boolean): Promise<LogConfig> {
+    async updateLogConfig(GuildID: string, LogChannel: string, MsgDeletedContent: boolean, MsgEditedContent: boolean, NicknameChanges: boolean, UserForcefullyDisconnected: boolean, UserForcefullyMoved: boolean): Promise<LogConfig> {
         const guildLogConfiguration=await this.getLogConfig(GuildID)
         if(!guildLogConfiguration) throw new HttpException('Configuratia nu a fost gasita', HttpStatus.BAD_REQUEST)
 
@@ -20,7 +20,6 @@ export class GuildLogService implements IGuildsLogService{
             MsgDeletedContent,
             MsgEditedContent,
             NicknameChanges,
-            SelfDeletedEditedMessage,
             UserForcefullyDisconnected,
             UserForcefullyMoved,
         })
