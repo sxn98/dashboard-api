@@ -38,8 +38,9 @@ export class GuildsController{
     async updateWelcomeChannel(
         @Param('GuildID') GuildID:string,
         @Body('channelID') channelID:string,
-        ){
-            const config=await this.guildsService.updateWelcomeChannel(GuildID,channelID)
+        @Body('welcomeString') welcomeString:string
+        ){ 
+            const config=await this.guildsService.updateWelcomeChannel(GuildID,channelID,welcomeString)
             this.wsHandler.guildWelcomeChannelUpdate(config)
             return config;
     }

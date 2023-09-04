@@ -21,13 +21,14 @@ export class GuildsService implements IGuildsService{
             prefix, // din cauza ca am destructurat, valoarea originala va fi rescrisa de catre prefixul nostru nou
         })
     }
-    async updateWelcomeChannel(GuildID: string, WelcomeChannelID: string) {
+    async updateWelcomeChannel(GuildID: string, WelcomeChannelID: string, WelcomeChannelString:string) {
         const guildConfiguration=await this.getGuildConfig(GuildID);
         if(!guildConfiguration) throw new HttpException('Configuratia nu a fost gasita', HttpStatus.BAD_REQUEST);
 
         return this.guildConfigRepository.save({
             ...guildConfiguration, 
-            WelcomeChannelID, 
+            WelcomeChannelID,
+            WelcomeChannelString 
         })
     }
 
